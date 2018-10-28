@@ -1,0 +1,39 @@
+<form id="form" action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                    <div class="form-group">
+                        <label for="firstName">Your first name</label>
+                        {{ form.FirstName }}
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Your last name</label>
+                        {{ form.LastName }}
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        {{ form.Email }}
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else, not today at least.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="userImage">One of your hottest selfies please</label> <br>
+                        {{ form.Image }}
+                        <small id="imageHelp" class="form-text text-muted">You will not find your selfie on YouPorn.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        {{ form.Gender }}
+                    </div>
+                    <div class="form-group">
+                        <label>Favourite Song</label>
+                        {{ form.FavouriteSong }}
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <label>Actually we're not going to check your password, yet</label>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="checkBox">
+                        <label class="form-check-label" for="exampleCheck1">I want to be a part of this</label>
+                    </div>
+                    <button onclick="checkBoxChecked()" class="btn btn-primary">Submit</button>
+                </form>
