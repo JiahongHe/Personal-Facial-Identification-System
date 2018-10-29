@@ -18,9 +18,9 @@ class TestRegistration(TestCase):
     
     def test_view(self):
         client = Client()
-        response_sucess = client.get(reverse('register'))
+        response_sucess = client.get(reverse('registrationPage'))
         response_failure = client.get('invalidURL')
-        self.assertEqual(resolve(reverse('register')).view_name, 'register')
+        self.assertEqual(resolve(reverse('registrationPage')).view_name, 'registrationPage')
         self.assertEqual(response_sucess.status_code, 200)
         self.assertNotEqual(response_failure.status_code, 200)
         
