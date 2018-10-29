@@ -2,7 +2,7 @@ language: python
 python:
  - "3.6"
  
-install: "pip install -r requirments.txt"
+install: "pip3 install -r requirments.txt"
 script: 
   - python3 src/server/backendServer/manage.py runserver &
   - bash test/test_main.sh
