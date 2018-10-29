@@ -1,4 +1,3 @@
-from django import forms
 from django.apps import apps
 from django.forms import ModelForm
 from requestHandler.models import User
@@ -12,5 +11,4 @@ class registrationForm(ModelForm):
             'Gender',
             'Image',
             'FavouriteSong',
-            'Email'
-        ]
+            'Email']

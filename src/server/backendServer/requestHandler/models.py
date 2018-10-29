@@ -30,11 +30,3 @@ class User(models.Model):
 
     def __str__(self):
 	    return "{} {}, {}".format(self.FirstName, self.LastName, self.Email)
-
-    def return_data_dic(self):
-        dic = {'FirstName': self.FirstName,
-               'LastName': self.LastName,
-               'Gender': self.Gender,
-               'Email': self.Email}
-        return dic
-
