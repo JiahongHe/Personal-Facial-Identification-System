@@ -21,6 +21,7 @@ if __name__ == '__main__':
     encodings = []
     identities = []
     for id, data in user_dic.items():
+        print(data['image'])
         image = face_recognition.load_image_file(data['image'])
         encodings.append(face_recognition.face_encodings(image)[0])
         identities.append(data['firstName'] + ' ' + data['lastName'])
