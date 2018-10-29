@@ -10,10 +10,11 @@ if __name__ == '__main__':
     #    change the variable API_url below to the correct server address.
     # 2. run this script.
 
-    print('retreiving all user data..')
+    print('retrieving all user data from the server')
     API_url = 'http://127.0.0.1:8000/request/requestInfo'
     user_dic = None
     try:
+        print('Data received, starting facial recognition..')
         user_dic = getAllUsers(API_url)
     except:
         raise ConnectionError('can not connect to the server to retreive user data')
