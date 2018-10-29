@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from .forms import registrationForm
 
 def registrationPage(request):
@@ -25,3 +25,5 @@ def register(request):
 			return HttpResponse("invalid form, please go back and send it again")
 
 		return render(request, "userRegistration/register.html")
+	else:
+		return HttpResponseForbidden("access denied")

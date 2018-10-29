@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .mock.recognition_mock import *
 from requestHandler.models import User
 import json
 
