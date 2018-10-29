@@ -9,7 +9,7 @@ class Song(models.Model):
     # models the song that might be used as favourite song for the users.
 
     SongName = models.CharField(max_length=100)
-    Album = models.CharField(max_length=100)
+    Album = models.CharField(max_length=100, null=True)
     File = models.FileField(upload_to='songs/', null=True)
 
     def __str__(self):
@@ -25,8 +25,16 @@ class User(models.Model):
     Gender = models.CharField(max_length=50, choices=GENDER_CHOICES)
     FavouriteSong = models.ForeignKey(Song, on_delete=models.CASCADE, null=True)
     Email = models.EmailField()
-    Image = models.ImageField(upload_to='usersImages/', blank=True, null=True)
+    Image = models.ImageField(upload_to='usersImages/', null=True)
     dateAdded = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
 	    return "{} {}, {}".format(self.FirstName, self.LastName, self.Email)
+
+    def return_data_dic(self):
+        dic = {'FirstName': self.FirstName,
+               'LastName': self.LastName,
+               'Gender': self.Gender,
+               'Email': self.Email}
+        return dic
+
