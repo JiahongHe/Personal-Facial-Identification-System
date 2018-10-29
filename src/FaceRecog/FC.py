@@ -4,10 +4,17 @@ from getAllUsers import getAllUsers
 
 if __name__ == '__main__':
 
+    # main function for the facial recognition system 
+    # to make it work:
+    # 1. make sure the server is runing, if the address of the server is not 'http://127.0.0.1:8000/'
+    #    change the variable API_url below to the correct server address.
+    # 2. run this script.
+
     print('retreiving all user data..')
+    API_url = 'http://127.0.0.1:8000/request/requestInfo'
     user_dic = None
     try:
-        user_dic = getAllUsers()
+        user_dic = getAllUsers(API_url)
     except:
         raise ConnectionError('can not connect to the server to retreive user data')
     encodings = []

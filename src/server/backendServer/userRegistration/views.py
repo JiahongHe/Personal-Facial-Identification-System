@@ -3,14 +3,18 @@ from django.http import HttpResponse
 from .forms import registrationForm
 
 def registrationPage(request):
+
+    # serves the user registration page
+
     if request.method == 'GET':
         form = registrationForm()
         context = {"form": form}
         return render(request, "userRegistration/register.html", context)
-    else:
-        return HttpResponse("ha?")
 
 def register(request):
+
+    # handles the submitted user registration form, validate it and save it to the database.
+
     if request.method == 'POST':
         form = registrationForm(request.POST, request.FILES)
         if form.is_valid():

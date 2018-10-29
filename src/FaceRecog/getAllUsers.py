@@ -1,7 +1,7 @@
 import requests
 import json
 
-def getAllUsers():
-    content = requests.get('http://127.0.0.1:8000/request/requestInfo').content
+def getAllUsers(url):
+    content = requests.get(url).content
     user_dic = json.loads(content)
     return user_dic

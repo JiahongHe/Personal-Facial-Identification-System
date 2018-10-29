@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    path('recognitionRequest', views.recognitionRequestHandler, name = 'recognize'),
-    path('requestInfo', views.requestInfo, name = 'test')
+    path('recognitionRequest', views.recognitionRequestHandler, name='recognize'),
+    path('requestInfo', views.requestInfo, name='test')
 ]

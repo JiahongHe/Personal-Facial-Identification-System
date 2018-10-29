@@ -5,6 +5,9 @@ from requestHandler.models import User
 import json
 
 def recognitionRequestHandler(request):
+
+    # handles the face recognition request, currently not in use now, maybe implemented in the future.
+
     if request.method == 'GET':
         image = request.FILES
         return HttpResponse(image, content_type="image/jpeg")
@@ -21,6 +24,10 @@ def recognitionRequestHandler(request):
         '''
 
 def requestInfo(request):
+
+    # API that returns all the necessary user infomation for facial recognition
+    # security measures might be implemented in the future.
+
     users = User.objects.all()
     result = {}
     for user in users:
@@ -28,10 +35,11 @@ def requestInfo(request):
         info['firstName'] = user.FirstName
         info['lastName'] = user.LastName
         info['image'] = user.Image.path
-        info['FavouriteSongName'] = user.FavouriteSong.SongName
         try:
+            info['FavouriteSongName'] = user.FavouriteSong.SongName
             info['FavouriteSongPath'] = user.FavouriteSong.File.path
-        except:
-            info['FavouriteSongPath'] = 'not specified yet'
+        except Exception as e:
+            info['FavouriteSongName'] = 'NULL'
+            info['FavouriteSongPath'] = 'NULL'
         result[user.id] = info
     return HttpResponse(json.dumps(result), content_type="application/json")
