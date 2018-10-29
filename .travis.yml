@@ -3,4 +3,6 @@ python:
  - "3.6"
  
 install: "pip install -r requirments.txt"
-script: bash test/test_main.sh
+script: 
+  - python3 src/server/backendServer/manage.py runserver &
+  - bash test/test_main.sh
