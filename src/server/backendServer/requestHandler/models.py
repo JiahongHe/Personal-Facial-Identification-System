@@ -30,3 +30,12 @@ class User(models.Model):
 
     def __str__(self):
 	    return "{} {}, {}".format(self.FirstName, self.LastName, self.Email)
+
+class Metadata(models.Model):
+    # admin data
+
+    default = models.ForeignKey(Song, null=True)
+    error = models.ForeignKey(Song, null=True)
+
+    def __str__(self):
+        return "def:{} err:{}".format(self.default, self.error)

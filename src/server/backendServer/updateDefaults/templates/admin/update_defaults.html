@@ -15,6 +15,7 @@
     				<h1>Update Defaults</h1>
     			</div>
     			<form>
+    				{% csrf_token %}
     				<div class="form-group">
                         <label for="default">Play when we see someone we don't know</label><br>
                         {{ form.default }}
