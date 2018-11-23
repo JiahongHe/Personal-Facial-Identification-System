@@ -12,3 +12,4 @@ class registrationForm(ModelForm):
             'Image',
             'FavouriteSong',
             'Email']
+
