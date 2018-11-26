@@ -1,6 +1,6 @@
 import cv2
 import face_recognition
-from getAllUsers import getAllUsers
+from getContent import getContent
 
 if __name__ == '__main__':
 
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     user_dic = None
     try:
         print('Data received, starting facial recognition..')
-        user_dic = getAllUsers(API_url)
+        user_dic = getContent(API_url)
     except:
         raise ConnectionError('can not connect to the server to retreive user data')
     encodings = []

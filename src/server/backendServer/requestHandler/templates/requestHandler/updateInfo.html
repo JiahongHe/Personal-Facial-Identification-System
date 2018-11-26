@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="update information page">
+        <meta name="author" content="JiahongHe">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <title> New User Registration </title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>
+                        Hello, these are your current information
+                    </h1>
+                    <p>After updating your infomation, press save button</p>
+                </div>
+                <form id="form" action="{% url 'userUpdate' %}?userId={{ userId }}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group" style="visibility: hidden">
+                    <label for="User ID">Your user Id</label>
+                    {{ form.userId }}
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Your first name</label>
+                    {{ form.FirstName }}
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Your last name</label>
+                    {{ form.LastName }}
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    {{ form.Email }}
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else, not today at least.</small>
+                </div>
+                <div class="form-group">
+                    <label for="userImage">One of your hottest selfies please</label> <br>
+                    {{ form.Image }}
+                </div>
+                <div class="form-group">
+                    <label>Favourite Song</label>
+                    {{ form.FavouriteSong }}
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    {{ form.passWord }}
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    {{ form.confirm_passWord }}
+                </div>
+                    <button onclick="checkBoxChecked()" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            function checkBoxChecked() {
+                checkBox = document.getElementById("checkBox");
+                if (checkBox.checkBoxChecked()) {
+                    form = document.getElementById("form");
+                    form.submit();
+                } else {
+                    alert("did u agree not not");
+                }
+            }
+        </script>
+
+    </body>
+</html>
