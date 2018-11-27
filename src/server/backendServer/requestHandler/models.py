@@ -27,3 +27,12 @@ class User(models.Model):
 
     def __str__(self):
 	    return "{} {}, {}".format(self.FirstName, self.LastName, self.Email)
+
+class SystemSettings(models.Model):
+    # admin data
+
+    defaultSong = models.ForeignKey(Song, null=True, on_delete=)
+    errorSong = models.ForeignKey(Song, null=True,)
+
+    def __str__(self):
+        return "def:{} err:{}".format(self.defaultSong, self.errorSong)
