@@ -23,7 +23,7 @@ class Test_getAllUsers(unittest.TestCase):
 
         # test if the returned result from the server is as expected.
 
-        result = getAllUsers(self.url)
+        result = getContent(self.url)
         self.assertIsInstance(result, dict)
         if len(result) > 0:
             for id, data in result.items():

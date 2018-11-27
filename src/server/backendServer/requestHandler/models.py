@@ -31,7 +31,7 @@ class User(models.Model):
 class SystemSettings(models.Model):
     # admin data
 
-    defaultSong = models.ForeignKey(Song, null=True, on_delete=)
+    defaultSong = models.ForeignKey(Song, null=True, on_delete=models.CASCADE)
     errorSong = models.ForeignKey(Song, null=True,)
 
     def __str__(self):
