@@ -27,7 +27,7 @@ class User(models.Model):
 
     def __str__(self):
 	    return "{} {}, {}".format(self.FirstName, self.LastName, self.Email)
-
+'''
 class SystemSettings(models.Model):
     # admin data
 
@@ -36,3 +36,4 @@ class SystemSettings(models.Model):
 
     def __str__(self):
         return "def:{} err:{}".format(self.defaultSong, self.errorSong)
+'''
