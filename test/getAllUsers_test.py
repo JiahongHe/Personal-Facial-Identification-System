@@ -3,7 +3,7 @@ import sys
 import requests
 sys.path.append('src/FaceRecog/')
 sys.path.append('../src/FaceRecog/')
-from getAllUsers import getAllUsers
+from getContent import getContent
 
 class Test_getAllUsers(unittest.TestCase):
 
