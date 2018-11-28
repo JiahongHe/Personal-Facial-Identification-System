@@ -1,2 +1,3 @@
 ./src/server/backendServer/db.sqlite3
 ./src/server/backendServer/media/
+*.pyc
