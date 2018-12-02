@@ -1,6 +1,7 @@
 import cv2
 import face_recognition
 from getContent import getContent
+from match_face import get_match
 
 if __name__ == '__main__':
 
@@ -42,16 +43,7 @@ if __name__ == '__main__':
 
         # Loop through each face in this frame of video
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
-            # See if the face is a match for the known face(s)
-            matches = face_recognition.compare_faces(encodings, face_encoding)
-
-            name = "Unknown"
-
-            # If a match was found in known_face_encodings, just use the first one.
-            if True in matches:
-                first_match_index = matches.index(True)
-                name = identities[first_match_index]
-
+            name = get_match(encodings, identities, face_encoding)
             # Draw a box around the face
             cv2.rectangle(frame, (left, top), (right, bottom), (0, 0, 255), 2)
 
