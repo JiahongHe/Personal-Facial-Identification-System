@@ -1,0 +1,5 @@
+[run]
+include = */src/*
+omit = *migrations*, *tests*, *.html
+plugins = django_coverage_plugin
+disable_warnings = no-data-collected
