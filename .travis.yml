@@ -4,6 +4,6 @@ python:
  
 install: "pip3 install -r requirments.txt"
 script: 
-  - python3 src/server/backendServer/manage.py runserver 127.0.0.1:8000 &
+  - python3 src/backendServer/manage.py runserver 127.0.0.1:8000 &
   - sleep 3
   - bash test/test_main.sh
