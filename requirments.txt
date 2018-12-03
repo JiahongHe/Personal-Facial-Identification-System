@@ -3,4 +3,5 @@ Pillow>=4.3.0
 requests>=2.18.4
 opencv-python>=3.3.0
 coverage>=4.5.2
+face_recognition
 django_coverage_plugin
