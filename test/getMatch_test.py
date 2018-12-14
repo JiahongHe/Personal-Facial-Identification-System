@@ -33,15 +33,17 @@ class Test_FC(unittest.TestCase):
         user_dic = getContent(self.url)
         encodings = []
         identities = []
+        ids = []
         for id, data in user_dic.items():
             image = face_recognition.load_image_file(data['image'])
             encodings.append(face_recognition.face_encodings(image)[0])
             identities.append(data['firstName'] + ' ' + data['lastName'])
+            ids.append(id)
             
         test_pics, test_identites = loadTestCase()
         for i, test_pic in enumerate(test_pics):
             face_location = face_recognition.face_locations(test_pic)
             face_encoding = face_recognition.face_encodings(test_pic, face_location)[0]
-            matched_identity = get_match(encodings, identities, face_encoding)
+            matched_identity, id = get_match(encodings, identities, face_encoding, ids)
             self.assertEqual(test_identites[i], matched_identity)
     
