@@ -5,3 +5,7 @@ opencv-python>=3.3.0
 coverage>=4.5.2
 face_recognition
 django_coverage_plugin
+pygame
+numpy
+time
+os

@@ -36,25 +36,25 @@ class User(models.Model):
     def voice_welcome_line(self):
         return "welcome, {}".format(self.FirstName)
 
-class SystemSettings(models.Model):
+class SystemSetting(models.Model):
     DefaultBehavior = models.CharField(max_length=50,
                                         choices=DEFAULT_BEHAVIOR_CHOICES,
                                         default="DefaultSong")
     DefaultSong = models.ForeignKey(Song, on_delete=models.SET_NULL, null=True)
 
     def save(self):
-        count = SystemSettings.objects.all().count()
+        count = SystemSetting.objects.all().count()
         save_permission = SystemSettings.has_add_permission(self)
 
         # if there's more than two objects it will not save them in the database
         if count >= 1:
-            SystemSettings.objects.all().delete()
-        super(SystemSettings, self).save()
+            SystemSetting.objects.all().delete()
+        super(SystemSetting, self).save()
             
             
 
     def has_add_permission(self):
-        return not SystemSettings.objects.exists()
+        return not SystemSetting.objects.exists()
     
     def __str__(self):
         return "DefaultBehavior: {}".format(self.DefaultBehavior)
