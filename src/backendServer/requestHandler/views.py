@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from requestHandler.models import User
+from requestHandler.models import User, Song, SystemSettings
 from .forms import updateForm
 import json
 
@@ -26,7 +26,7 @@ def requestInfo(request):
         except Exception as e:
             info['FavouriteSongName'] = 'NULL'
             info['FavouriteSongPath'] = 'NULL'
-        result[user.id] = info
+        result[user.FirstName + user.LastName] = info
     return HttpResponse(json.dumps(result), content_type="application/json")
 
 def requestLoginInfo(request):
@@ -54,7 +54,9 @@ def requestUpdateUserInfo(request):
         initials['FavouriteSong'] = user.FavouriteSong
         initials['Image'] = user.Image
         initials['userId'] = user.id
+        initials['passWord'] = user.passWord
         form = updateForm(initial=initials)
+        form.fields['Email'].widget.attrs['readonly'] = True
         context = {"form": form}
         return render(request, "requestHandler/updateInfo.html", context)
 
@@ -72,3 +74,27 @@ def requestUpdateUserInfo(request):
                 return HttpResponse("user not found")
         else:
             return HttpResponse("invalid information")
+
+def getSettings(request):
+    if request.method == 'GET':
+        settingObj = SystemSettings.objects.all()
+        result = {}
+        if (len(settingObj) > 0):
+            setting = settingObj[0]
+            result["defaultBehavior"] = setting.DefaultBehavior
+            result["defaultSong"] = setting.DefaultSong.SongName if setting.DefaultSong is not None else "Null"
+            return HttpResponse(json.dumps(result), content_type="application/json")
+        else:
+            result["defaultBehavior"] = "Null"
+            result["defaultSong"] = "NULL"
+            return HttpResponse(json.dumps(result), content_type="application/json")
+
+def getSongs(request):
+    if request.method == 'GET':
+        result = {}
+        Songs = Song.objects.all()
+        for song in Songs:
+            result[song.SongName] = song.File.path if song.File is not None else "None"
+        return HttpResponse(json.dumps(result), content_type="application/json")
+
+

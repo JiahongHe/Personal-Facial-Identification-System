@@ -4,7 +4,6 @@ from django import forms
 from .models import User
 
 class updateForm(ModelForm):
-    confirm_passWord = forms.CharField(widget=forms.PasswordInput())
     userId = forms.IntegerField()
     class Meta:
         model = User

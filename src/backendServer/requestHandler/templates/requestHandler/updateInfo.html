@@ -24,20 +24,20 @@
                     {{ form.userId }}
                 </div>
                 <div class="form-group">
-                    <label for="firstName">Your first name</label>
+                    <label for="firstName">First name</label>
                     {{ form.FirstName }}
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Your last name</label>
+                    <label for="lastName">Last name</label>
                     {{ form.LastName }}
                 </div>
                 <div class="form-group">
-                    <label for="email">Email address</label>
+                    <label for="email">Email</label>
                     {{ form.Email }}
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else, not today at least.</small>
+                    <small id="emailHelp" class="form-text text-muted">Your email would be used as your username.</small>
                 </div>
                 <div class="form-group">
-                    <label for="userImage">One of your hottest selfies please</label> <br>
+                    <label for="userImage">Your photo</label> <br>
                     {{ form.Image }}
                 </div>
                 <div class="form-group">
@@ -48,26 +48,9 @@
                     <label>Password</label>
                     {{ form.passWord }}
                 </div>
-                <div class="form-group">
-                    <label>Confirm Password</label>
-                    {{ form.confirm_passWord }}
-                </div>
-                    <button onclick="checkBoxChecked()" class="btn btn-primary">Submit</button>
+                    <button class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
-
-        <script type="text/javascript">
-            function checkBoxChecked() {
-                checkBox = document.getElementById("checkBox");
-                if (checkBox.checkBoxChecked()) {
-                    form = document.getElementById("form");
-                    form.submit();
-                } else {
-                    alert("did u agree not not");
-                }
-            }
-        </script>
-
     </body>
 </html>

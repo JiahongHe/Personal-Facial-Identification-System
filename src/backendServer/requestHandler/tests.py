@@ -1,5 +1,5 @@
 from django.test import TestCase
-from requestHandler.models import User, Song
+from requestHandler.models import User, Song, SystemSettings
 from .test_data import load_test_data
 
 class TestModelUser(TestCase):
@@ -63,3 +63,19 @@ class TestModelSong(TestCase):
             self.assertIsInstance(song, Song)
             self.assertEqual(song.SongName, 'Test Song ' + str(index))
             index += 1
+
+class TestModelSystemSettings(TestCase):
+
+    def setUp(self):
+        SystemSettings(DefaultBehavior="RandomSong").save()
+    
+    def test_settingQuery(self):
+        settings = SystemSettings.objects.all()
+
+        self.assertIsInstance(settings[0], SystemSettings)
+        self.assertEqual(len(settings), 1)
+
+    def test_settingUniquenity(self):
+        SystemSettings(DefaultBehavior="Beep").save()
+        settings = SystemSettings.objects.all()
+        self.assertEqual(len(settings), 1)

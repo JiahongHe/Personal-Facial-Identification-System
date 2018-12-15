@@ -3,6 +3,11 @@ from django.utils import timezone
 
 
 DEFAULT_PASSWORD = "123456"
+DEFAULT_BEHAVIOR_CHOICES = (
+    ("RandomSong", "RandomSong"),
+    ("DefaultSong", "DefaultSong"),
+    ("Voice", "Voice"),
+)
 
 class Song(models.Model):
 
@@ -19,7 +24,7 @@ class User(models.Model):
     id = models.AutoField(primary_key=True)
     FirstName = models.CharField(max_length=50)
     LastName = models.CharField(max_length=50)
-    FavouriteSong = models.ForeignKey(Song, on_delete=models.CASCADE, null=True)
+    FavouriteSong = models.ForeignKey(Song, on_delete=models.CASCADE, null=True, blank=True)
     Email = models.EmailField()
     Image = models.ImageField(upload_to='usersImages/', null=True)
     dateAdded = models.DateTimeField(default=timezone.now)
@@ -27,13 +32,29 @@ class User(models.Model):
 
     def __str__(self):
 	    return "{} {}, {}".format(self.FirstName, self.LastName, self.Email)
-'''
+
+    def voice_welcome_line(self):
+        return "welcome, {}".format(self.FirstName)
+
 class SystemSettings(models.Model):
-    # admin data
+    DefaultBehavior = models.CharField(max_length=50,
+                                        choices=DEFAULT_BEHAVIOR_CHOICES,
+                                        default="DefaultSong")
+    DefaultSong = models.ForeignKey(Song, on_delete=models.SET_NULL, null=True)
 
-    defaultSong = models.ForeignKey(Song, null=True, on_delete=models.CASCADE)
-    errorSong = models.ForeignKey(Song, null=True,)
+    def save(self):
+        count = SystemSettings.objects.all().count()
+        save_permission = SystemSettings.has_add_permission(self)
 
+        # if there's more than two objects it will not save them in the database
+        if count >= 1:
+            SystemSettings.objects.all().delete()
+        super(SystemSettings, self).save()
+            
+            
+
+    def has_add_permission(self):
+        return not SystemSettings.objects.exists()
+    
     def __str__(self):
-        return "def:{} err:{}".format(self.defaultSong, self.errorSong)
-'''
+        return "DefaultBehavior: {}".format(self.DefaultBehavior)
