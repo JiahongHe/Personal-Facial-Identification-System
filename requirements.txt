@@ -7,5 +7,3 @@ face_recognition
 django_coverage_plugin
 pygame
 numpy
-time
-os
