@@ -8,7 +8,7 @@ echo "testing FaceRecog"
 #python3 -m unittest getAllUsers_test.py >> reports/testingReport.txt
 coverage run --rcfile=../.coveragerc -m unittest getAllUsers_test.py >> reports/testingReport.txt
 #python3 -m unittest getMatch_test.py >> reports/testingReport.txt
-coverage run --rcfile=../.coveragerc -m unittest getMatch_test.py >> reports/testingReport.txt
+coverage run --rcfile=../.coveragerc -m -a unittest getMatch_test.py >> reports/testingReport.txt
 cd ..
 coverage combine src/backendServer/.coverage test/.coverage
 coverage report
