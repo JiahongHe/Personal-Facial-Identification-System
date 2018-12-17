@@ -12,3 +12,4 @@ coverage run --rcfile=../.coveragerc -m unittest getMatch_test.py >> reports/tes
 cd ..
 coverage combine src/backendServer/.coverage test/.coverage
 coverage report
+coverage html

@@ -24,7 +24,7 @@ class User(models.Model):
     id = models.AutoField(primary_key=True)
     FirstName = models.CharField(max_length=50)
     LastName = models.CharField(max_length=50)
-    FavouriteSong = models.ForeignKey(Song, on_delete=models.CASCADE, null=True, blank=True)
+    FavouriteSong = models.ForeignKey(Song, on_delete=models.SET_NULL, null=True, blank=True)
     Email = models.EmailField()
     Image = models.ImageField(upload_to='usersImages/', null=True)
     dateAdded = models.DateTimeField(default=timezone.now)
@@ -44,7 +44,7 @@ class SystemSetting(models.Model):
 
     def save(self):
         count = SystemSetting.objects.all().count()
-        save_permission = SystemSettings.has_add_permission(self)
+        save_permission = SystemSetting.has_add_permission(self)
 
         # if there's more than two objects it will not save them in the database
         if count >= 1:

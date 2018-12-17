@@ -19,7 +19,10 @@ def requestInfo(request):
         info = {}
         info['firstName'] = user.FirstName
         info['lastName'] = user.LastName
-        info['image'] = user.Image.path
+        try: 
+            info['image'] = user.Image.path
+        except:
+            info['image'] = 'NULL'
         try:
             info['FavouriteSongName'] = user.FavouriteSong.SongName
             info['FavouriteSongPath'] = user.FavouriteSong.File.path
