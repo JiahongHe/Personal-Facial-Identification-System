@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from requestHandler.models import User, Song, SystemSettings
+from requestHandler.models import User, Song, SystemSetting
 from .forms import updateForm
 import json
 
@@ -19,7 +19,10 @@ def requestInfo(request):
         info = {}
         info['firstName'] = user.FirstName
         info['lastName'] = user.LastName
-        info['image'] = user.Image.path
+        try: 
+            info['image'] = user.Image.path
+        except:
+            info['image'] = 'NULL'
         try:
             info['FavouriteSongName'] = user.FavouriteSong.SongName
             info['FavouriteSongPath'] = user.FavouriteSong.File.path
@@ -77,7 +80,7 @@ def requestUpdateUserInfo(request):
 
 def getSettings(request):
     if request.method == 'GET':
-        settingObj = SystemSettings.objects.all()
+        settingObj = SystemSetting.objects.all()
         result = {}
         if (len(settingObj) > 0):
             setting = settingObj[0]

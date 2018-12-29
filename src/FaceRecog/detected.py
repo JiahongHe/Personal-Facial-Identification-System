@@ -11,7 +11,7 @@ def playSong(songPath):
     pygame.mixer.init()
     pygame.mixer.music.load(songPath)
     pygame.mixer.music.play()
-    time.sleep(10)
+    time.sleep(15)
 
 def saySomething(line):
     os.system('say ' + "'" + line + "'") 

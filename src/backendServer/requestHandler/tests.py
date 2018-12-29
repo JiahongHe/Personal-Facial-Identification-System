@@ -1,6 +1,8 @@
 from django.test import TestCase
-from requestHandler.models import User, Song, SystemSettings
+from requestHandler.models import User, Song, SystemSetting
+from django.test.client import RequestFactory
 from .test_data import load_test_data
+from .views import requestUpdateUserInfo
 
 class TestModelUser(TestCase):
     def setUp(self):
@@ -67,15 +69,72 @@ class TestModelSong(TestCase):
 class TestModelSystemSettings(TestCase):
 
     def setUp(self):
-        SystemSettings(DefaultBehavior="RandomSong").save()
+        SystemSetting(DefaultBehavior="RandomSong").save()
     
     def test_settingQuery(self):
-        settings = SystemSettings.objects.all()
+        settings = SystemSetting.objects.all()
 
-        self.assertIsInstance(settings[0], SystemSettings)
+        self.assertIsInstance(settings[0], SystemSetting)
         self.assertEqual(len(settings), 1)
 
     def test_settingUniquenity(self):
-        SystemSettings(DefaultBehavior="Beep").save()
-        settings = SystemSettings.objects.all()
+        SystemSetting(DefaultBehavior="Beep").save()
+        settings = SystemSetting.objects.all()
         self.assertEqual(len(settings), 1)
+
+class TestViewRequestInfo(TestCase):
+
+    def setUp(self):
+        user = User.objects.create(FirstName='Jhon',
+                                    LastName='Doe',
+                                    Email='JohoDoe@test.com')
+        user.save()
+
+    def testMain(self):
+        url = "http://127.0.0.1:8000/request/requestInfo"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+class TestViewRequestLoginInfo(TestCase):
+
+    def setUp(self):
+        user = User.objects.create(FirstName='Jhon',
+                                    LastName='Doe',
+                                    Email='JohoDoe@test.com')
+        user.save()
+
+    def testMain(self):
+        url = "http://127.0.0.1:8000/request/requestLoginInfo"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+class TestViewRequestUpdateUserInfo(TestCase):
+
+    def setUp(self):
+        self.factory = RequestFactory()
+        user = User.objects.create(FirstName='Jhon',
+                                    LastName='Doe',
+                                    Email='JohoDoe@test.com')
+        user.save()
+
+    def testMain(self):
+        url = "http://127.0.0.1:8000/request/userUpdate"
+        request = self.factory.get(url)
+        request.GET = request.GET.copy()
+        request.GET['userId'] = 1
+        response = requestUpdateUserInfo(request)
+        self.assertEqual(response.status_code, 200)
+
+class TestViewGetSettings(TestCase):
+
+    def testMain(self):
+        url = "http://127.0.0.1:8000/request/getSettings"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+class TestViewGetSongs(TestCase):
+
+    def testMain(self):
+        url = "http://127.0.0.1:8000/request/getSongs"
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
